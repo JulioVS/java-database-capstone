@@ -73,10 +73,90 @@ _As an Admin, I want to run a stored procedure in MySQL CLI, so that I can get t
 **Acceptance Criteria:**
 1. Given my Admin Dashboard
 2. When I click the option to run statistic reports
-3. Then I can get a report about appointment and usage statistics
+3. Then I should get a report about appointment and usage statistics
 
 **Priority:** Low
 **Story Points:** 5
 **Notes:**
 - There must already be activity info to run the report on
+
+## Patient User Stories
+
+**Title:**
+_As a Patient, I want to view a list of doctors without logging in, so that I can explore options before registering._
+
+**Acceptance Criteria:**
+1. Given a system homepage
+2. When I click the View Doctors section
+3. Then should get a list of all available doctors in the system
+
+**Priority:** High
+**Story Points:** 5
+**Notes:**
+- None
+
+**Title:**
+_As a Patient, I want to sign up using my email and password, so that I can book appointments._
+
+**Acceptance Criteria:**
+1. Given a Sign Up link or button
+2. When I follow or press it
+3. Then I should be able to register on the system with my email and password
+
+**Priority:** High
+**Story Points:** 8
+**Notes:**
+- The patient must not be already registered
+
+**Title:**
+_As a Patient, I want to log into the portal, so that I can manage my bookings._
+
+**Acceptance Criteria:**
+1. Given a Log In link or button
+2. When I follow or press it
+3. Then I should be able to enter the system and manage my bookings
+
+**Priority:** Medium
+**Story Points:** 8
+**Notes:**
+- The patient must already be registered on the system and have bookings
+
+**Title:**
+_As a Patient, I want to log out of the portal, so that I can secure my account._
+
+**Acceptance Criteria:**
+1. Given a Log Out link or button
+2. When I follow it or press it
+3. Then I should safely exit the system
+
+**Priority:** High
+**Story Points:** 3
+**Notes:**
+- The patient must already be logged into the system
+
+**Title:**
+_As a Patient, I want to log in and book an hour-long appointment, so that I can consult with a doctor._
+
+**Acceptance Criteria:**
+1. Given a successful log in into the system
+2. When I go the Doctors listing page and choose an available one
+3. Then I should be able to book an hour-long appointment with him
+
+**Priority:** Medium
+**Story Points:** 5
+**Notes:**
+- The doctor needs to have a lot of availability to accept hour-long appointments
+
+**Title:**
+_As a Patient, I want to view my upcoming appointments, so that I can prepare accordingly._
+
+**Acceptance Criteria:**
+1. Given a successful log in into the system
+2. When I go to My Appointments section
+3. Then I should see a list of all my upcoming appointments
+
+**Priority:** Medium
+**Story Points:** 5
+**Notes:**
+- The patient must already have appointments
 
