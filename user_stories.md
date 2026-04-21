@@ -160,3 +160,82 @@ _As a Patient, I want to view my upcoming appointments, so that I can prepare ac
 **Notes:**
 - The patient must already have appointments
 
+## Doctor User Stories
+
+**Title:**
+_As a Doctor, I want to log into the portal, so that I can manage my appointments._
+
+**Acceptance Criteria:**
+1. Given a login page
+2. When I enter my credentials
+3. Then I should be redirected to my Doctor Dashboard and see my appointments
+
+**Priority:** High
+**Story Points:** 5
+**Notes:**
+- The doctor must already be registered on the system
+
+**Title:**
+_As a Doctor, I want to log out of the portal, so that I protect my data._
+
+**Acceptance Criteria:**
+1. Given a logout link or button
+2. When I follow it or press it
+3. Then I should safely exit the system
+
+**Priority:** High
+**Story Points:** 3
+**Notes:**
+- The doctor must already be logged into the system
+
+**Title:**
+_As a Doctor, I want to view my appointment calendar, so that I can stay organized._
+
+**Acceptance Criteria:**
+1. Given a successful login into the system 
+2. When I click into My Appointments section
+3. Then I should see my appointment calendar
+
+**Priority:** High
+**Story Points:** 5
+**Notes:**
+- The doctor must already be logged in and have scheduled appointments
+
+**Title:**
+_As a Doctor, I want to be able to mark my unavailability, so that patients are only shown the available slots._
+
+**Acceptance Criteria:**
+1. Given my calendar schedule on the system
+2. When I select a target time slot
+3. Then I should be able to mark it as unavailable, as to not receive any appointments for it
+
+**Priority:** Medium
+**Story Points:** 5
+**Notes:**
+- None
+
+**Title:**
+_As a Doctor, I want to be able to update my profile with specialization and contact information, so that patients have up-to-date information._
+
+**Acceptance Criteria:**
+1. Given my Doctor Dashboard on the system
+2. When I click into My Profile section
+3. Then I want to be able to edit and update my specialization and contact information
+
+**Priority:** Medium
+**Story Points:** 5
+**Notes:**
+- None
+
+**Title:**
+_As a Doctor, I want to be able to view the patient details for upcoming appointments, so that I can be prepared._
+
+**Acceptance Criteria:**
+1. Given my Doctor Dashboard on the system
+2. When I click into My Appointments section
+3. Then I want to be able to see my patient details
+
+**Priority:** Medium
+**Story Points:** 5
+**Notes:**
+- None
