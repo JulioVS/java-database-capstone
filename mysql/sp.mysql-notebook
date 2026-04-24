@@ -1,0 +1,714 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "\\about\nuse cms;\nshow tables;\nDELIMITER $\n\nCREATE PROCEDURE GetDailyAppointmentReportByDoctor(\n    IN report_date DATE\n)\nBEGIN\n    SELECT \n        d.name AS doctor_name,\n        a.appointment_time,\n        a.status,\n        p.name AS patient_name,\n        p.phone AS patient_phone\n    FROM \n        appointment a\n    JOIN \n        doctor d ON a.doctor_id = d.id\n    JOIN \n        patient p ON a.patient_id = p.id\n    WHERE \n        DATE(a.appointment_time) = report_date\n    ORDER BY \n        d.name, a.appointment_time;\nEND$\n\nDELIMITER ;\nCALL GetDailyAppointmentReportByDoctor('2025-04-15');\nDELIMITER $\n\nCREATE PROCEDURE GetDoctorWithMostPatientsByMonth(\n    IN input_month INT, \n    IN input_year INT\n)\nBEGIN\n    SELECT\n        doctor_id, \n        COUNT(patient_id) AS patients_seen\n    FROM\n        appointment\n    WHERE\n        MONTH(appointment_time) = input_month \n        AND YEAR(appointment_time) = input_year\n    GROUP BY\n        doctor_id\n    ORDER BY\n        patients_seen DESC\n    LIMIT 1;\nEND $\n\nDELIMITER ;\nCALL GetDoctorWithMostPatientsByMonth(4, 2025);\nDELIMITER $\n\nCREATE PROCEDURE GetDoctorWithMostPatientsByYear(\n    IN input_year INT\n)\nBEGIN\n    SELECT\n        doctor_id, \n        COUNT(patient_id) AS patients_seen\n    FROM\n        appointment\n    WHERE\n        YEAR(appointment_time) = input_year\n    GROUP BY\n        doctor_id\n    ORDER BY\n        patients_seen DESC\n    LIMIT 1;\nEND $\n\nDELIMITER ;\nCALL GetDoctorWithMostPatientsByYear(2025);\n",
+    "options": {
+        "tabSize": 4,
+        "indentSize": 4,
+        "insertSpaces": true,
+        "defaultEOL": "LF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 76,
+                    "column": 1
+                },
+                "position": {
+                    "lineNumber": 76,
+                    "column": 1
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 53,
+                "column": 1
+            },
+            "firstPositionDeltaTop": -22
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "content": "Welcome to the MySQL Shell - DB Notebook.\n\nPress Cmd+Enter to execute the code block.\n\nExecute \\sql to switch to SQL, \\js to JavaScript and \\ts to TypeScript mode.\nExecute \\help or \\? for help;",
+                            "language": "ansi"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 6
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 2,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 0,
+                            "resultId": "51b83694-5837-4ee6-f70c-266dd9ce7b57",
+                            "content": "OK, 0 records retrieved in 0.48ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 8
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 3,
+                "end": 3,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "cb08e61c-09f6-494f-f38c-029bebc8fa63"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 12
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "5213a50f-51b0-4875-ac89-34e39ce7574a",
+                    "resultId": "cb08e61c-09f6-494f-f38c-029bebc8fa63",
+                    "rows": [
+                        {
+                            "0": "admin"
+                        },
+                        {
+                            "0": "appointment"
+                        },
+                        {
+                            "0": "doctor"
+                        },
+                        {
+                            "0": "doctor_available_times"
+                        },
+                        {
+                            "0": "patient"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Tables_in_cms",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 5 records retrieved in 1.254ms"
+                    },
+                    "totalRowCount": 5,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "show tables",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 4,
+                "end": 28,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 1,
+                            "resultId": "0481cc72-5588-4766-b827-8a66561683dd",
+                            "content": "OK, 0 records retrieved in 1.255ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": "$",
+                        "span": {
+                            "start": 0,
+                            "length": 11
+                        },
+                        "contentStart": 0,
+                        "state": 4
+                    },
+                    {
+                        "delimiter": "$",
+                        "span": {
+                            "start": 11,
+                            "length": 484
+                        },
+                        "contentStart": 13,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 495,
+                            "length": 13
+                        },
+                        "contentStart": 497,
+                        "state": 4
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 29,
+                "end": 29,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "a24c479c-79d3-47dc-e64b-528231447fce"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 53
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 53,
+                            "length": 0
+                        },
+                        "contentStart": 52,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "5213a50f-51b0-4875-ac89-34e39ce7574a",
+                    "resultId": "a24c479c-79d3-47dc-e64b-528231447fce",
+                    "rows": [
+                        {
+                            "0": "Dr. Ava Hall",
+                            "1": "2025-04-15 11:00:00",
+                            "2": 1,
+                            "3": "Lucas Turner",
+                            "4": "889-666-6666"
+                        },
+                        {
+                            "0": "Dr. Mark Johnson",
+                            "1": "2025-04-15 12:00:00",
+                            "2": 1,
+                            "3": "Michael Jordan",
+                            "4": "888-444-4444"
+                        },
+                        {
+                            "0": "Dr. Mark Johnson",
+                            "1": "2025-04-15 13:00:00",
+                            "2": 1,
+                            "3": "Olivia Moon",
+                            "4": "888-555-5555"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "doctor_name",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "appointment_time",
+                            "field": "1",
+                            "dataType": {
+                                "type": 26,
+                                "dateTimePrecision": 8,
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "status",
+                            "field": "2",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "patient_name",
+                            "field": "3",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "patient_phone",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 3 records retrieved in 1.363ms"
+                    },
+                    "totalRowCount": 3,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "subIndex": 0,
+                    "sql": "CALL GetDailyAppointmentReportByDoctor('2025-04-15')",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 30,
+                "end": 52,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 1,
+                            "resultId": "7b1dd776-0542-4d4b-e4a4-62a623dffc4c",
+                            "content": "OK, 0 records retrieved in 2.588ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": "$",
+                        "span": {
+                            "start": 0,
+                            "length": 11
+                        },
+                        "contentStart": 0,
+                        "state": 4
+                    },
+                    {
+                        "delimiter": "$",
+                        "span": {
+                            "start": 11,
+                            "length": 405
+                        },
+                        "contentStart": 13,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 416,
+                            "length": 13
+                        },
+                        "contentStart": 418,
+                        "state": 4
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 53,
+                "end": 53,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "82fa0697-920e-4dc4-9c2c-dbb1127ed820"
+                    ]
+                },
+                "currentHeight": 119,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 47
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 47,
+                            "length": 0
+                        },
+                        "contentStart": 46,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "5213a50f-51b0-4875-ac89-34e39ce7574a",
+                    "resultId": "82fa0697-920e-4dc4-9c2c-dbb1127ed820",
+                    "rows": [
+                        {
+                            "0": 2,
+                            "1": 31
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "doctor_id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 5,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 20,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INT8",
+                                    "SERIAL"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "patients_seen",
+                            "field": "1",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 2.397ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "subIndex": 0,
+                    "sql": "CALL GetDoctorWithMostPatientsByMonth(4, 2025)",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 54,
+                "end": 74,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 1,
+                            "resultId": "b0ec29c8-e1c4-4e31-8c8c-5c3f18657fe7",
+                            "content": "OK, 0 records retrieved in 1.26ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": "$",
+                        "span": {
+                            "start": 0,
+                            "length": 11
+                        },
+                        "contentStart": 0,
+                        "state": 4
+                    },
+                    {
+                        "delimiter": "$",
+                        "span": {
+                            "start": 11,
+                            "length": 328
+                        },
+                        "contentStart": 13,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 339,
+                            "length": 13
+                        },
+                        "contentStart": 341,
+                        "state": 4
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 75,
+                "end": 75,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "9e6af4d7-7e4e-4a8b-8ff5-4acf0662b231"
+                    ]
+                },
+                "currentHeight": 119,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 43
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 43,
+                            "length": 0
+                        },
+                        "contentStart": 42,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "5213a50f-51b0-4875-ac89-34e39ce7574a",
+                    "resultId": "9e6af4d7-7e4e-4a8b-8ff5-4acf0662b231",
+                    "rows": [
+                        {
+                            "0": 1,
+                            "1": 34
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "doctor_id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 5,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 20,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INT8",
+                                    "SERIAL"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "patients_seen",
+                            "field": "1",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 1.164ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "subIndex": 0,
+                    "sql": "CALL GetDoctorWithMostPatientsByYear(2025)",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 76,
+                "end": 76,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}
