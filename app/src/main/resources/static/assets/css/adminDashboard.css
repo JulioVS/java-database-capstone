@@ -1,7 +1,7 @@
 /*this is the style sheet for the adminDashboard. */
 
 /* 
-Global Reset (`*`)
+Global Reset (`*`) ✅
 
 * Purpose: Ensure consistent layout across all browsers.
 * Properties:
@@ -10,7 +10,7 @@ Global Reset (`*`)
   * `padding: 0` — removes default inner spacing.
   * `box-sizing: border-box` — ensures padding and borders are included within the total width/height of elements.
 
-Base HTML & Body (`html, body`)
+Base HTML & Body (`html, body`) ✅
 
 * Purpose: Establish a full-height layout and apply a standard font across the page.
 * Properties:
@@ -18,7 +18,7 @@ Base HTML & Body (`html, body`)
   * `height: 100%` — allows containers to stretch to the full viewport height.
   * `font-family: Arial, sans-serif` — applies a clean, readable sans-serif font.
 
-Main Layout Wrapper (`.wrapper`)
+Main Layout Wrapper (`.wrapper`) ✅
 
 * Purpose: Create a flexible, vertical layout that fills the entire screen.
 * Properties:
@@ -37,7 +37,7 @@ Section Heading (`h2`)
   * `margin-bottom: 50px` — creates space below the heading.
   * `color: #003e3e` — uses a strong teal for visual anchoring.
 
-Main Content Section (`.main-content`)
+Main Content Section (`.main-content`) ✅
 
 * Purpose: Layout the main content with padding and a background image.
 * Properties:
@@ -52,7 +52,7 @@ Main Content Section (`.main-content`)
   * `background-repeat: no-repeat` — avoids tiling the image.
   * `background-attachment: fixed` — fixes the image while scrolling.
 
-Primary Button (`button`)
+Primary Button (`button`) ✅
 
 * Purpose: Design prominent, interactive buttons for main actions.
 
@@ -72,7 +72,7 @@ Primary Button (`button`)
 
   * Retains the same red background to maintain branding.
 
-Admin Button (`.adminBtn`)
+Admin Button (`.adminBtn`) ✅
 
 * Purpose: Provide a secondary button style for admin-specific actions.
 
@@ -92,3 +92,78 @@ Admin Button (`.adminBtn`)
 
 
 */
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base HTML & Body */
+html,
+body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+/* Main Layout Wrapper */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Section Heading */
+h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 50px;
+  color: #003e3e;
+}
+
+/* Main Content Section */
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-image: url("index.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Primary Button */
+button {
+  background-color: #a62b1f;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  width: 200px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #a62b1f;
+}
+
+/* Admin Button */
+.adminBtn {
+  background-color: #f4f4f4;
+  color: #333;
+  font-weight: bold;
+  width: 110px;
+  padding: 10px 0;
+  border: none;
+  cursor: pointer;
+}
+
+.adminBtn:hover {
+  color: #a62b1f;
+}
