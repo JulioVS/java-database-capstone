@@ -1,0 +1,7 @@
+{
+    "cSpell.enabled": true,
+    "cSpell.words": [
+        "Thymeleaf"
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
+}
