@@ -42,7 +42,7 @@
   Return the complete doctor card element ✅
 */
 
-import { showBookingOverlay } from "../loggedPatient.js";
+// import { showBookingOverlay } from "../loggedPatient.js";
 import { deleteDoctor } from "../services/doctorServices.js";
 import { getPatientData } from "../services/patientServices.js";
 

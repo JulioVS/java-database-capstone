@@ -27,7 +27,7 @@ This file defines the Doctor Dashboard interface, allowing doctors to view and m
 6. Set the Favicon ✅
 
    * Add a favicon using Thymeleaf pathing: 
-     `<link rel="icon" type="image/png" th:src="@{/assets/images/logo/logo.png}" />`
+     `<link rel="icon" type="image/png" th:href="@{/assets/images/logo/logo.png}" />`
 
 7. Set the Page Title ✅
 
@@ -105,7 +105,7 @@ This file defines the Doctor Dashboard interface, allowing doctors to view and m
 
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" th:src="@{/assets/images/logo/logo.png}" />
+    <link rel="icon" type="image/png" th:href="@{/assets/images/logo/logo.png}" />
     <title>Doctor Dashboard</title>
     <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}">
     <link rel="stylesheet" th:href="@{/assets/css/doctorDashboard.css}">
