@@ -1,5 +1,7 @@
 package com.project.back_end.services;
 
+import com.project.back_end.models.Appointment;
+
 @org.springframework.stereotype.Service
 public class Service {
 
@@ -60,6 +62,9 @@ public class Service {
     // - If no matching time slot is found, it returns 0 (invalid).
     // - If the doctor doesn’t exist, it returns -1.
     // This logic prevents overlapping or invalid appointment bookings.
+    public int validateAppointment(Appointment appointment) {
+        return 1; // Valid appointment time
+    }
 
     // 7. **validatePatient Method**
     // This method checks whether a patient with the same email or phone number
