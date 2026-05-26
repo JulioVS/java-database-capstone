@@ -71,17 +71,20 @@ public class DoctorService {
             return new ArrayList<>();
         }
 
+        // Fetch appointments for the doctor on the specified date
         List<Appointment> appointments = appointmentRepository.findByDoctorIdAndAppointmentTimeBetween(doctorId,
                 date.atStartOfDay(), date.plusDays(1).atStartOfDay());
 
+        // Extract booked time slots from the appointments
         Set<String> bookedSlots = appointments.stream()
                 .map(a -> a.getAppointmentTime().toLocalTime().toString())
                 .collect(Collectors.toSet());
 
+        // Filter available time slots by removing booked slots
         return doctor.getAvailableTimes().stream()
-                .filter(time -> !bookedSlots.contains(time))
+                .filter(time -> bookedSlots.stream().noneMatch(bookedTime -> time.startsWith(bookedTime)))
                 .collect(Collectors.toList());
-                
+
     }
 
     // 5. **saveDoctor Method**:
