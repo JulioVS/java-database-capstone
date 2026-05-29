@@ -1,6 +1,9 @@
 package com.project.back_end.mvc;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,12 +34,15 @@ public class DashboardController {
     // - If invalid, redirects to the root URL, likely the login or home page.
     @GetMapping("/adminDashboard/{token}")
     public String adminDashboard(@PathVariable String token) {
-        String validationResult = service.validateToken(token, "admin");
-        if (validationResult.equals("No errors")) {
+
+        ResponseEntity<Map<String,String>> validationResult = service.validateToken(token, "admin");
+        
+        if (validationResult.getStatusCode().is2xxSuccessful()){
             return "admin/adminDashboard"; // Forward to admin dashboard view
         } else {
             return "redirect:/"; // Redirect to root URL if token is invalid
         }
+    
     }
 
     // 4. Define the `doctorDashboard` Method:
@@ -48,12 +54,15 @@ public class DashboardController {
     // - If the token is invalid, redirects to the root URL.
     @GetMapping("/doctorDashboard/{token}")
     public String doctorDashboard(@PathVariable String token) {
-        String validationResult = service.validateToken(token, "doctor");
-        if (validationResult.equals("No errors")) {
+        
+        ResponseEntity<Map<String,String>> validationResult = service.validateToken(token, "doctor");
+
+        if (validationResult.getStatusCode().is2xxSuccessful()){
             return "doctor/doctorDashboard"; // Forward to doctor dashboard view
         } else {
             return "redirect:/"; // Redirect to root URL if token is invalid
         }
+
     }
 
 }
