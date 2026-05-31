@@ -57,6 +57,10 @@ public class AppointmentController {
     public Map<String, Object> getAppointments(@PathVariable String date, @PathVariable String patientName,
             @PathVariable String token) {
 
+        if (patientName.equalsIgnoreCase("null")) {
+            patientName = null; // Handle "null" as a literal string to mean no patient filter
+        }
+
         ResponseEntity<Map<String, String>> response = service.validateToken(token, "doctor");
 
         if (!response.getStatusCode().is2xxSuccessful()) {

@@ -83,11 +83,9 @@ document.getElementById("datePicker").addEventListener("change", (event) => {
 
 async function loadAppointments() {
   try {
-    const appointments = await getAllAppointments(
-      selectedDate,
-      patientName,
-      token,
-    );
+    const response = await getAllAppointments(selectedDate, patientName, token);
+    const appointments = response.appointments;
+
     tableBody.innerHTML = ""; // Clear existing rows
 
     if (appointments.length === 0) {
@@ -98,13 +96,11 @@ async function loadAppointments() {
     }
 
     appointments.forEach((appointment) => {
-      const patient = {
-        id: appointment.patientId,
-        name: appointment.patientName,
-        phone: appointment.patientPhone,
-        email: appointment.patientEmail,
-      };
-      const row = createPatientRow(patient, appointment);
+      const appointmentId = appointment.id; // Get appointment ID for prescription link
+      const doctorId = appointment.doctor ? appointment.doctor.id : null; // Get doctor ID if available
+      const patient = appointment.patient || {}; // Handle case where patient info might be missing
+
+      const row = createPatientRow(patient, appointmentId, doctorId);
       tableBody.appendChild(row);
     });
   } catch (error) {

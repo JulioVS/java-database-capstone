@@ -89,10 +89,10 @@ public class Doctor {
     // - Description:
     // - Represents the doctor's phone number.
     // - The @NotNull annotation ensures that a phone number must be provided.
-    // - The @Pattern(regexp = "^[0-9]{10}$") annotation validates that the phone
-    // number must be exactly 10 digits long.
+    // - The @Pattern(regexp = "^[0-9]{3}-[0-9]{3}-[0-9]{4}$") annotation validates that the phone
+    // number must be in the format 123-456-7890.
     @NotNull(message = "Phone number must not be null")
-    @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be exactly 10 digits")
+    @Pattern(regexp = "^[0-9]{3}-[0-9]{3}-[0-9]{4}$", message = "Phone number must be in the format 123-456-7890")
     private String phone;
 
     // 7. 'availableTimes' field:

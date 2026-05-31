@@ -168,6 +168,7 @@ public class DoctorService {
         } catch (Exception e) {
             return 0; // Internal error
         }
+
     }
 
     // 9. **validateDoctor Method**:
@@ -192,6 +193,7 @@ public class DoctorService {
         String token = tokenService.generateToken(doctor.getEmail());
 
         return ResponseEntity.ok(Map.of("token", token));
+
     }
 
     // 10. **findDoctorByName Method**:
@@ -311,7 +313,7 @@ public class DoctorService {
     // - Instruction: Ensure the time filtering is accurately applied based on the
     // given specialty and time period (AM/PM).
     @Transactional
-    public Map<String, Object> filterDoctorByTimeAndSpecialty(String specialty, String amOrPm) {
+    public Map<String, Object> filterDoctorByTimeAndSpecialty(String amOrPm, String specialty) {
 
         List<Doctor> doctors = doctorRepository.findBySpecialtyIgnoreCase(specialty);
         List<Doctor> filteredDoctors = filterDoctorByTime(doctors, amOrPm);
@@ -344,6 +346,7 @@ public class DoctorService {
         List<Doctor> filteredDoctors = filterDoctorByTime(doctors, amOrPm);
 
         return Map.of("doctors", filteredDoctors);
+
     }
 
 }

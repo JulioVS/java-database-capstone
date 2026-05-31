@@ -142,7 +142,8 @@ function renderDoctorCards(doctors) {
   });
 }
 
-function adminAddDoctor() {
+window.adminAddDoctor = async function () {
+
   const name = document.getElementById("doctorName").value.trim();
   const email = document.getElementById("doctorEmail").value.trim();
   const phone = document.getElementById("doctorPhone").value.trim();
@@ -166,9 +167,12 @@ function adminAddDoctor() {
     specialty,
     availableTimes,
   };
-
+  
   saveDoctor(doctor, token)
-    .then(() => {
+    .then((response) => {
+      if (!response.success) {
+        throw new Error(response.message || "Failed to add doctor");
+      }
       alert("Doctor added successfully!");
       closeModal(); // Close the modal
       loadDoctorCards(); // Reload the doctor cards

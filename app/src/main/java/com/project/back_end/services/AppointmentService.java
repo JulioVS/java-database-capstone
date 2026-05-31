@@ -202,6 +202,8 @@ public class AppointmentService {
         List<Appointment> appointments = appointmentRepository.findByDoctorIdAndAppointmentTimeBetween(doctor.getId(),
                 date.atStartOfDay(), date.plusDays(1).atStartOfDay());
 
+        // If a patient name filter is provided, further filter the appointments by
+        // patient name
         if (pname != null && !pname.isEmpty()) {
             appointments = appointments.stream()
                     .filter(appointment -> appointment.getPatient().getName().toLowerCase()

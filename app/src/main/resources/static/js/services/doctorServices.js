@@ -105,15 +105,15 @@ export async function filterDoctors(name, time, specialty) {
     );
     if (response.ok) {
       const data = await response.json();
-      return data;
+      return data.doctors || [];
     } else {
       console.error("Error filtering doctors:", response.statusText);
-      return { doctors: [] };
+      return [];
     }
   } catch (error) {
     console.error("Error filtering doctors:", error);
     alert("An error occurred while filtering doctors. Please try again later.");
-    return { doctors: [] };
+    return [];
   }
 }
 

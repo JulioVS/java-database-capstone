@@ -108,38 +108,38 @@ public class Service {
     // - If none of the filters are provided, it returns all available doctors.
     // This flexible filtering mechanism allows the frontend or consumers of the API
     // to search and narrow down doctors based on user criteria.
-    public Map<String, Object> filterDoctor(String name, String specialty, String time) {
+    public Map<String, Object> filterDoctor(String name, String time, String specialty) {
 
-        if (name == null && specialty == null && time == null) {
+        if (name == null && time == null && specialty == null) {
             return Map.of("doctors", doctorService.getDoctors());
         }
 
-        if (name != null && specialty == null && time == null) {
-            return Map.of("doctors", doctorService.findDoctorByName(name));
+        if (name != null && time == null && specialty == null) {
+            return doctorService.findDoctorByName(name);
         }
 
-        if (name == null && specialty != null && time == null) {
-            return Map.of("doctors", doctorService.filterDoctorBySpecialty(specialty));
+        if (name == null && time != null && specialty == null) {
+            return doctorService.filterDoctorsByTime(time);
         }
 
-        if (name == null && specialty == null && time != null) {
-            return Map.of("doctors", doctorService.filterDoctorsByTime(time));
+        if (name == null && time == null && specialty != null) {
+            return doctorService.filterDoctorBySpecialty(specialty);
         }
 
-        if (name != null && specialty != null && time == null) {
-            return Map.of("doctors", doctorService.filterDoctorByNameAndSpecialty(name, specialty));
+        if (name != null && time != null && specialty == null) {
+            return doctorService.filterDoctorByNameAndTime(name, time);
         }
 
-        if (name != null && specialty == null && time != null) {
-            return Map.of("doctors", doctorService.filterDoctorByNameAndTime(name, time));
+        if (name != null && time == null && specialty != null) {
+            return doctorService.filterDoctorByNameAndSpecialty(name, specialty);
         }
 
-        if (name == null && specialty != null && time != null) {
-            return Map.of("doctors", doctorService.filterDoctorByTimeAndSpecialty(time, specialty));
+        if (name == null && time != null && specialty != null) {
+            return doctorService.filterDoctorByTimeAndSpecialty(time, specialty);
         }
 
-        if (name != null && specialty != null && time != null) {
-            return Map.of("doctors", doctorService.filterDoctorsByNameSpecialtyAndTime(name, specialty, time));
+        if (name != null && time != null && specialty != null) {
+            return doctorService.filterDoctorsByNameSpecialtyAndTime(name, specialty, time);
         }
 
         return Map.of("doctors", null); // Placeholder for actual filtering logic
