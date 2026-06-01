@@ -61,9 +61,9 @@ public class Patient {
     // - The @NotNull annotation ensures that a password must be provided.
     // - The @Size(min = 6) annotation ensures that the password must be at least 6
     // characters long.
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotNull(message = "Password must not be null")
     @Size(min = 6, message = "Password must be at least 6 characters long")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     // 5. 'phone' field:
@@ -71,10 +71,10 @@ public class Patient {
     // - Description:
     // - Represents the patient's phone number.
     // - The @NotNull annotation ensures that a phone number must be provided.
-    // - The @Pattern(regexp = "^[0-9]{10}$") annotation validates that the phone
-    // number must be exactly 10 digits long.
+    // - The @Pattern(regexp = "^[0-9]{3}-[0-9]{3}-[0-9]{4}$") annotation validates that the phone
+    // number must be in the format 123-456-7890.
     @NotNull(message = "Phone number must not be null")
-    @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be exactly 10 digits")
+    @Pattern(regexp = "^[0-9]{3}-[0-9]{3}-[0-9]{4}$", message = "Phone number must be in the format 123-456-7890")
     private String phone;
 
     // 6. 'address' field:

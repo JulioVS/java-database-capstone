@@ -292,22 +292,19 @@ public class Service {
 
         // Filter appointments based on provided condition and doctor name
         if (condition != null && name == null) {
-            return ResponseEntity
-                    .ok(Map.of("appointments", patientService.filterByCondition(condition, patientId)));
+            return patientService.filterByCondition(condition, patientId);
         }
 
         if (condition == null && name != null) {
-            return ResponseEntity
-                    .ok(Map.of("appointments", patientService.filterByDoctor(name, patientId)));
+            return patientService.filterByDoctor(name, patientId);
         }
 
         if (condition != null && name != null) {
-            return ResponseEntity.ok(Map.of("appointments",
-                    patientService.filterByDoctorAndCondition(condition, name, patientId)));
+            return patientService.filterByDoctorAndCondition(condition, name, patientId);
         }
 
         if (condition == null && name == null) {
-            return ResponseEntity.ok(Map.of("appointments", patientService.getPatientAppointments(patientId, token)));
+            return patientService.getPatientAppointments(patientId, token);
         }
 
         return ResponseEntity.ok(Map.of("appointments", null)); // Placeholder for actual filtering logic
