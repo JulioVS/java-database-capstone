@@ -99,11 +99,16 @@ public class PatientController {
     // - Validates the token using the shared service.
     // - If valid, retrieves the patient's appointment data from `PatientService`;
     // otherwise, returns a validation error.
-    @GetMapping("/{id}/{token}")
-    public ResponseEntity<Map<String, Object>> getPatientAppointments(@PathVariable Long id,
+    @GetMapping("/{id}/{user}/{token}")
+    public ResponseEntity<Map<String, Object>> getPatientAppointments(@PathVariable @NonNull Long id,
+            @PathVariable String user,
             @PathVariable String token) {
 
-        ResponseEntity<Map<String, String>> response = service.validateToken(token, "patient");
+        if (!"patient".equals(user) && !"doctor".equals(user) && !"admin".equals(user)) {
+            return ResponseEntity.status(403).body(Map.of("error", "Unauthorized role: " + user));
+        }
+
+        ResponseEntity<Map<String, String>> response = service.validateToken(token, user);
 
         if (!response.getStatusCode().is2xxSuccessful()) {
             return ResponseEntity.status(response.getStatusCode())

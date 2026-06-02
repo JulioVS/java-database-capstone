@@ -78,17 +78,11 @@ public class PatientService {
     // - Instruction: Ensure that appointment data is properly converted into DTOs
     // and the method handles errors gracefully.
     @Transactional
-    public ResponseEntity<Map<String, Object>> getPatientAppointments(Long id, String token) {
+    public ResponseEntity<Map<String, Object>> getPatientAppointments(@NonNull Long id, String token) {
 
-        String patientEmail = tokenService.extractEmail(token);
+        Patient patient = patientRepository.findById(id).orElse(null);
 
-        if (patientEmail == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-        }
-
-        Patient patient = patientRepository.findByEmail(patientEmail);
-
-        if (patient == null || !patient.getId().equals(id)) {
+        if (patient == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
 

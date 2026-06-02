@@ -75,7 +75,7 @@ public class PrescriptionService {
         }
     }
 
-    // 4. **getPrescriptions Method**:
+    // 4. **getPrescription Method**:
     // - Retrieves prescriptions associated with a specific appointment based on
     // the `appointmentId`.
     // - If a prescription is found, it returns it within a map wrapped in a `200
@@ -85,7 +85,7 @@ public class PrescriptionService {
     // - Instruction: Ensure that this method handles edge cases, such as no
     // prescriptions found for the given appointment, by returning meaningful
     // responses.
-    public ResponseEntity<Map<String, Object>> getPrescriptions(Long appointmentId) {
+    public ResponseEntity<Map<String, Object>> getPrescription(Long appointmentId) {
 
         Map<String, Object> response = new HashMap<>();
 
@@ -103,14 +103,14 @@ public class PrescriptionService {
 
         } catch (Exception e) {
             // Log the exception (you can use a logging framework like SLF4J)
-            System.err.println("Error fetching prescriptions: " + e.getMessage());
-            response.put("message", "An error occurred while fetching the prescriptions.");
+            System.err.println("Error fetching prescription: " + e.getMessage());
+            response.put("message", "An error occurred while fetching the prescription.");
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     // 5. **Exception Handling and Error Responses**:
-    // - Both methods (`savePrescription` and `getPrescriptions`) contain try-catch
+    // - Both methods (`savePrescription` and `getPrescription`) contain try-catch
     // blocks to handle exceptions that may occur during database interaction.
     // - If an error occurs, the method logs the error and returns an HTTP `500
     // Internal Server Error` response with a corresponding error message.
