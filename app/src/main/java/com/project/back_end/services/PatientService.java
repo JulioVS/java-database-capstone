@@ -239,7 +239,7 @@ public class PatientService {
             response.put("phone", patient.getPhone());
             response.put("address", patient.getAddress());
 
-            return ResponseEntity.ok(response);
+            return ResponseEntity.ok(Map.of("patient", response));
 
         } catch (Exception e) {
             // Log the exception

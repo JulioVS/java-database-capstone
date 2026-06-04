@@ -64,15 +64,20 @@ const ADMIN_API = `${API_BASE_URL}/admin`;
 const DOCTOR_API = `${API_BASE_URL}/doctor/login`;
 
 window.onload = function () {
-  const adminLoginBtn = document.getElementById("adminLogin");
-  const doctorLoginBtn = document.getElementById("doctorLogin");
+  const adminBtn = document.getElementById("adminBtn");
+  const doctorBtn = document.getElementById("doctorBtn");
+  const patientBtn = document.getElementById("patientBtn");
 
-  if (adminLoginBtn) {
-    adminLoginBtn.addEventListener("click", () => openModal("adminLogin"));
+  if (adminBtn) {
+    adminBtn.addEventListener("click", () => openModal("adminLogin"));
   }
 
-  if (doctorLoginBtn) {
-    doctorLoginBtn.addEventListener("click", () => openModal("doctorLogin"));
+  if (doctorBtn) {
+    doctorBtn.addEventListener("click", () => openModal("doctorLogin"));
+  }
+
+  if (patientBtn) {
+    patientBtn.addEventListener("click", () => selectRole("patient"));
   }
 };
 
@@ -89,8 +94,7 @@ window.adminLoginHandler = async function () {
       body: JSON.stringify(admin),
     });
 
-    // if (response.ok) {
-    if (true) { // Temporarily bypassing response.ok check for testing purposes
+    if (response.ok) {
       const data = await response.json();
       localStorage.setItem("token", data.token);
       selectRole("admin");
@@ -116,8 +120,7 @@ window.doctorLoginHandler = async function () {
       body: JSON.stringify(doctor),
     });
 
-    // if (response.ok) {
-    if (true) { // Temporarily bypassing response.ok check for testing purposes
+    if (response.ok) {
       const data = await response.json();
       localStorage.setItem("token", data.token);
       selectRole("doctor");

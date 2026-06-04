@@ -45,6 +45,7 @@
 // import { showBookingOverlay } from "../loggedPatient.js";
 import { deleteDoctor } from "../services/doctorServices.js";
 import { getPatientData } from "../services/patientServices.js";
+import { showBookingOverlay } from "../loggedPatient.js";
 
 export function createDoctorCard(doctor) {
   const card = document.createElement("div");
@@ -98,10 +99,10 @@ export function createDoctorCard(doctor) {
       }
     });
     actions.appendChild(deleteButton);
-  } else if (userRole === "patient") {
+  } else if (userRole === "loggedPatient") {
     const bookButton = document.createElement("button");
     bookButton.textContent = "Book Now";
-    bookButton.addEventListener("click", async () => {
+    bookButton.addEventListener("click", async (event) => {
       const token = localStorage.getItem("token");
       if (!token) {
         alert("Please log in to book an appointment.");
@@ -109,7 +110,7 @@ export function createDoctorCard(doctor) {
       }
       try {
         const patientData = await getPatientData(token);
-        showBookingOverlay(doctor, patientData);
+        showBookingOverlay(event, doctor, patientData);
       } catch (error) {
         console.error("Error fetching patient details:", error);
         alert("Failed to fetch patient details. Please try again.");
