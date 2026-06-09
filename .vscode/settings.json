@@ -1,6 +1,7 @@
 {
     "cSpell.enabled": true,
     "cSpell.words": [
+        "Dskip",
         "DTOs",
         "HMAC",
         "iloveyou",
@@ -8,6 +9,7 @@
         "pathing",
         "pname",
         "springframework",
+        "temurin",
         "Thymeleaf",
         "VARCHAR"
     ],
